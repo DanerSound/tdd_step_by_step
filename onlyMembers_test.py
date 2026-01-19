@@ -24,14 +24,13 @@ class Test(unittest.TestCase):
         #assert
         self.assertEqual(result, 1)
 
-    def test_GIVEN_element_not_present_in_list_WHEN_searched_THEN_return_not_present_message(self):
+    def test_GIVEN_element_not_present_in_list_WHEN_searched_THEN_return_not_present_message_with_error(self):
 
         to_check = "A_team"
         team_list = ["team1", 2, "B_team", 1, 3.5 ]
 
-        result = memberCheck(to_check, team_list)
-
-        self.assertEqual(result, "element not present")
+        with self.assertRaises(ValueError):
+            memberCheck(to_check, team_list)
 
     def test_GIVEN_list_with_duplicate_elements_WHEN_searched_THEN_return_first_index(self):
 
