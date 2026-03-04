@@ -35,3 +35,7 @@ class TestCalculateStudentAverages(unittest.TestCase):
         with self.assertRaises(KeyError):
             calculate_student_averages(students_list)
 
+    def test_GIVEN_non_list_students_WHEN_calculated_THEN_raise_TypeError(self):
+        student_list = "not a list"
+        with self.assertRaises(TypeError):
+            calculate_student_averages(student_list)

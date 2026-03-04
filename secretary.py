@@ -8,6 +8,9 @@ def student_validator(student):
 
 
 def calculate_student_averages(students_list):
+    if not isinstance(students_list, list):
+        raise TypeError("Input must be a list of students")
+    
     for student in students_list:
         student_validator(student)
 
