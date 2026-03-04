@@ -27,4 +27,11 @@ import unittest
 from secretary import calculate_student_averages
 
 class TestCalculateStudentAverages(unittest.TestCase):
-    
+    def test_GIVEN_student_missing_required_field_WHEN_calculated_THEN_raise_KeyError(self):
+        students_list = [
+            {"nome": "Mario", "cognome": "Rossi", "classe": "3A"},  # manca il campo "voti"
+        ]
+
+        with self.assertRaises(KeyError):
+            calculate_student_averages(students_list)
+
