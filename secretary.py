@@ -4,6 +4,9 @@ def student_validator(student):
     for field in required_fields:
         if field not in student:
             raise KeyError(f"Missing required field: {field}")
+        
+    if not isinstance(student['voti'], list):
+            raise TypeError("Grades must be a list")
 
 
 

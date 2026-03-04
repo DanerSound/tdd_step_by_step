@@ -37,5 +37,14 @@ class TestCalculateStudentAverages(unittest.TestCase):
 
     def test_GIVEN_non_list_students_WHEN_calculated_THEN_raise_TypeError(self):
         student_list = "not a list"
+        
         with self.assertRaises(TypeError):
             calculate_student_averages(student_list)
+
+    def test_GIVEN_student_with_non_list_grades_WHEN_calculated_THEN_raise_TypeError(self):
+        students_list = [
+            {"nome": "Mario", "cognome": "Rossi", "classe": "3A", "voti": "Not a list"},
+        ]
+
+        with self.assertRaises(TypeError):
+            calculate_student_averages(students_list)
