@@ -12,8 +12,8 @@ test_GIVEN_student_with_non_list_grades_WHEN_calculated_THEN_raise_TypeError
 test_GIVEN_student_with_empty_grades_list_WHEN_calculated_THEN_return_average_as_None
 test_GIVEN_empty_students_list_WHEN_calculated_THEN_return_empty_list
 test_GIVEN_students_with_string_grades_WHEN_calculated_THEN_raise_TypeError
-------
 test_GIVEN_student_with_negative_grade_WHEN_calculated_THEN_raise_ValueError
+------
 test_GIVEN_student_with_grade_greater_than_10_WHEN_calculated_THEN_raise_ValueError
 test_GIVEN_student_with_mixed_valid_and_invalid_grades_WHEN_calculated_THEN_raise_ValueError
 
@@ -110,7 +110,7 @@ class TestCalculateStudentAverages(unittest.TestCase):
         self.assertEqual(result[0]["media"], 0.0)
 
     def test_GIVEN_empty_students_list_WHEN_calculated_THEN_return_empty_list(
-            self,
+        self,
     ):
         students_list = []
 
@@ -119,10 +119,21 @@ class TestCalculateStudentAverages(unittest.TestCase):
         self.assertEqual(result, [])
 
     def test_GIVEN_students_with_string_grades_WHEN_calculated_THEN_raise_TypeError(
-            self):
+        self,
+    ):
         students_list = [
             {"nome": "Mario", "cognome": "Rossi", "classe": "3A", "voti": ["A", "B"]},
         ]
 
         with self.assertRaises(TypeError):
+            calculate_student_averages(students_list)
+
+    def test_GIVEN_student_with_negative_grade_WHEN_calculated_THEN_raise_ValueError(
+        self,
+    ):
+        students_list = [
+            {"nome": "Mario", "cognome": "Rossi", "classe": "3A", "voti": [8, -1, 7]},
+        ]
+
+        with self.assertRaises(ValueError):
             calculate_student_averages(students_list)
