@@ -52,6 +52,22 @@ class TestCalculateStudentAverages(unittest.TestCase):
 
         self.assertEqual(result[0]["media"], 5.0)
 
+    def test_GIVEN_student_with_float_grades_WHEN_calculated_THEN_return_correct_average(
+        self,
+    ):
+        student_list = [
+            {
+                "nome": "Mario",
+                "cognome": "Rossi",
+                "classe": "3A",
+                "voti": [8.5, 9.0, 7.5],
+            },
+        ]
+
+        result = calculate_student_averages(student_list)
+
+        self.assertEqual(result[0]["media"], 8.333333333333334)
+
     def test_GIVEN_student_missing_required_field_WHEN_calculated_THEN_raise_KeyError(
         self,
     ):
