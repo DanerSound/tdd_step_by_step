@@ -12,6 +12,11 @@ def student_validator(students_list):
     if not isinstance(student["voti"], list):
         raise TypeError("Grades must be a list")
 
+    for student in students_list:
+        for grade in student["voti"]:
+            if not isinstance(grade, (int, float)):
+                raise TypeError("Grades must be numeric values")
+
 
 def calculate_student_averages(students_list):
     if len(students_list) == 0:

@@ -118,3 +118,11 @@ class TestCalculateStudentAverages(unittest.TestCase):
 
         self.assertEqual(result, [])
 
+    def test_GIVEN_students_with_string_grades_WHEN_calculated_THEN_raise_TypeError(
+            self):
+        students_list = [
+            {"nome": "Mario", "cognome": "Rossi", "classe": "3A", "voti": ["A", "B"]},
+        ]
+
+        with self.assertRaises(TypeError):
+            calculate_student_averages(students_list)
