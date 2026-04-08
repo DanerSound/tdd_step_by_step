@@ -14,6 +14,8 @@ def student_validator(students_list):
 
 
 def calculate_student_averages(students_list):
+    if len(students_list) == 0:
+        return []
     student_validator(students_list)
     student_avg = []
     media = 0

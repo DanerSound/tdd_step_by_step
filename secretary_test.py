@@ -6,15 +6,13 @@ La funzione deve stampare un elenco di tutti gli studenti e calcolare la media d
 test_GIVEN_valid_students_with_numeric_grades_WHEN_calculated_THEN_return_students_with_correct_average
 test_GIVEN_student_with_boundary_grades_0_and_10_WHEN_calculated_THEN_return_correct_average
 test_GIVEN_student_with_float_grades_WHEN_calculated_THEN_return_correct_average
-
 test_GIVEN_student_missing_required_field_WHEN_calculated_THEN_raise_KeyError
 test_GIVEN_non_list_students_WHEN_calculated_THEN_raise_TypeError
 test_GIVEN_student_with_non_list_grades_WHEN_calculated_THEN_raise_TypeError
 test_GIVEN_student_with_empty_grades_list_WHEN_calculated_THEN_return_average_as_None
 test_GIVEN_empty_students_list_WHEN_calculated_THEN_return_empty_list
-------
-
 test_GIVEN_students_with_string_grades_WHEN_calculated_THEN_raise_TypeError
+------
 test_GIVEN_student_with_negative_grade_WHEN_calculated_THEN_raise_ValueError
 test_GIVEN_student_with_grade_greater_than_10_WHEN_calculated_THEN_raise_ValueError
 test_GIVEN_student_with_mixed_valid_and_invalid_grades_WHEN_calculated_THEN_raise_ValueError
@@ -110,3 +108,13 @@ class TestCalculateStudentAverages(unittest.TestCase):
         result = calculate_student_averages(student_list)
 
         self.assertEqual(result[0]["media"], 0.0)
+
+    def test_GIVEN_empty_students_list_WHEN_calculated_THEN_return_empty_list(
+            self,
+    ):
+        students_list = []
+
+        result = calculate_student_averages(students_list)
+
+        self.assertEqual(result, [])
+
