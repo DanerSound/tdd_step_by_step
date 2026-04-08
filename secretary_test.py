@@ -106,7 +106,7 @@ class TestCalculateStudentAverages(unittest.TestCase):
 
         result = calculate_student_averages(student_list)
 
-        self.assertEqual(result[0]["media"], 0.0)
+        self.assertEqual(result[0]["media"], None)
 
     def test_GIVEN_empty_students_list_WHEN_calculated_THEN_return_empty_list(
         self,

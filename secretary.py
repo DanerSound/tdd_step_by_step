@@ -1,39 +1,48 @@
-def student_validator(students_list):
-    if not isinstance(students_list, list):
-        raise TypeError("Input must be a list of students")
+def validate_students(students: list[dict]) -> None:
+    if not isinstance(students, list):
+        raise TypeError("students must be a list")
 
-    required_fields = ["nome", "cognome", "classe", "voti"]
+    required_fields = {"nome", "cognome", "classe", "voti"}
 
-    for student in students_list:
-        for field in required_fields:
-            if field not in student:
-                raise KeyError(f"Missing required field: {field} in student: {student}")
+    for student in students:
+        if not isinstance(student, dict):
+            raise TypeError("each student must be a dictionary")
 
-    if not isinstance(student["voti"], list):
-        raise TypeError("Grades must be a list")
+        missing = required_fields - student.keys()
+        if missing:
+            raise KeyError(f"missing fields: {missing}")
 
-    for student in students_list:
-        for grade in student["voti"]:
+        grades = student["voti"]
+
+        if not isinstance(grades, list):
+            raise TypeError("voti must be a list")
+
+        for grade in grades:
             if not isinstance(grade, (int, float)):
-                raise TypeError("Grades must be numeric values")
-            if grade < 0 or grade > 10:
-                raise ValueError("Grades must be between 0 and 10")
+                raise TypeError("grades must be numeric")
+
+            if not 0 <= grade <= 10:
+                raise ValueError("grades must be between 0 and 10")
 
 
-def calculate_student_averages(students_list):
-    if len(students_list) == 0:
+def calculate_student_averages(students: list[dict]) -> list[dict]:
+    if not students:
         return []
-    student_validator(students_list)
-    student_avg = []
-    media = 0
-    for student in students_list:
-        if len(student["voti"]) == 0:
-            student_avg.append(
-                {"nome": student["nome"], "cognome": student["cognome"], "media": 0.0}
-            )
+
+    validate_students(students)
+
+    result = []
+
+    for student in students:
+        grades = student["voti"]
+
+        if not grades:
+            avg = None
         else:
-            media = sum(student["voti"]) / len(student["voti"])
-            student_avg.append(
-                {"nome": student["nome"], "cognome": student["cognome"], "media": media}
-            )
-    return student_avg
+            avg = sum(grades) / len(grades)
+
+        result.append(
+            {"nome": student["nome"], "cognome": student["cognome"], "media": avg}
+        )
+
+    return result
