@@ -62,3 +62,15 @@ class TestLoginManagement(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             validate_user_data(user_data)
+
+    def test_GIVEN_email_without_at_symbol_WHEN_validated_THEN_raise_ValueError(self):
+        user_data ={
+            "username": "testuser",
+            "password": "1234566788",
+            "email":"myemailmydomanin",
+            "registration_date": "2023-01-01"
+        }
+
+        with self.assertRaises(ValueError):
+            validate_user_data(user_data)
+
