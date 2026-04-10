@@ -1,5 +1,8 @@
 
 def validate_user_data(user_data):
+    if not isinstance(user_data, dict):
+        raise TypeError("user_data must be a dictionary")
+
     required_fields = ["username", "password", "email", "registration_date"]
 
     missing_keys = required_fields - user_data.keys()

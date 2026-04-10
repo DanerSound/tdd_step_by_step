@@ -45,3 +45,9 @@ class TestLoginManagement(unittest.TestCase):
 
         with self.assertRaises(KeyError):
             validate_user_data(user_data)
+
+    def test_GIVEN_non_dict_user_WHEN_validated_THEN_raise_TypeError(self):
+        user_data = "this is not a dictionary"
+
+        with self.assertRaises(TypeError):
+            validate_user_data(user_data)
