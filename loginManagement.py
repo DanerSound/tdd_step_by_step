@@ -1,3 +1,4 @@
+from datetime import datetime
 
 def validate_user_data(user_data):
     if not isinstance(user_data, dict):
@@ -23,5 +24,10 @@ def validate_user_data(user_data):
         year, month, day = map(int, user_data["registration_date"].split("-"))
     except ValueError:
         raise ValueError("Invalid registration date format. Expected YYYY-MM-DD")
+
+    try:
+        datetime.strptime(user_data["registration_date"], "%Y-%m-%d")
+    except ValueError:
+        raise ValueError("Invalid date format or non-existent date")
     
     return True

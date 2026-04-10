@@ -74,3 +74,24 @@ class TestLoginManagement(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_user_data(user_data)
 
+    def test_GIVEN_date_not_in_expected_format_WHEN_validated_THEN_raise_ValueError(self):
+        user_data = {
+            "username": "testuser",
+            "password": "<PASSWORD>",
+            "email": "myemail@mydomanin",
+            "registration_date": "2023/01/01"
+        }
+
+        with self.assertRaises(ValueError):
+            validate_user_data(user_data)
+
+    def test_GIVEN_non_existing_date_WHEN_validated_THEN_raise_ValueError(self):
+        user_data = {
+            "username": "testuser",
+            "password": "1223344556787dd",
+            "email": "<EMAI@L>",
+            "registration_date": "2023-02-30"
+        }
+
+        with self.assertRaises(ValueError):
+            validate_user_data(user_data)
