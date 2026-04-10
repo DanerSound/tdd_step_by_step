@@ -51,3 +51,14 @@ class TestLoginManagement(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             validate_user_data(user_data)
+
+    def test_GIVEN_password_shorter_than_min_length_WHEN_validated_THEN_raise_ValueError(self):
+        user_data = {
+            "username": "testuser",
+            "password": "1234",
+            "email": "<EMAIL>",
+            "registration_date": "2023-01-01",
+        }
+
+        with self.assertRaises(ValueError):
+            validate_user_data(user_data)
