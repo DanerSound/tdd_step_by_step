@@ -225,3 +225,5 @@ datasets/
 .idea
 
 __pycache__
+
+.vscode

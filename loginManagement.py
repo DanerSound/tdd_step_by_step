@@ -13,6 +13,9 @@ def validate_user_data(user_data):
     for field in required_fields:
         if field not in user_data:
             raise ValueError(f"Missing required field: {field}")
+
+    if not user_data["username"].strip():
+        raise ValueError("Username non valido")
     
     if len(user_data["password"]) < 8:
         raise ValueError("Password must be at least 8 characters long")

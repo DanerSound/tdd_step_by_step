@@ -23,7 +23,9 @@ from loginManagement import validate_user_data
 
 class TestLoginManagement(unittest.TestCase):
 
-    def test_GIVEN_valid_user_data_WHEN_validated_THEN_user_is_accepted(self):
+    def test_GIVEN_valid_user_data_WHEN_validated_THEN_user_is_accepted(
+            self,
+    ):
 
         user_data = {
             "username": "testuser",
@@ -34,7 +36,9 @@ class TestLoginManagement(unittest.TestCase):
 
         self.assertTrue(validate_user_data(user_data))
 
-    def test_GIVEN_user_missing_required_field_WHEN_validated_THEN_raise_KeyError(self):
+    def test_GIVEN_user_missing_required_field_WHEN_validated_THEN_raise_KeyError(
+            self,
+    ):
 
         user_data = {
             "username": "testuser",
@@ -46,13 +50,17 @@ class TestLoginManagement(unittest.TestCase):
         with self.assertRaises(KeyError):
             validate_user_data(user_data)
 
-    def test_GIVEN_non_dict_user_WHEN_validated_THEN_raise_TypeError(self):
+    def test_GIVEN_non_dict_user_WHEN_validated_THEN_raise_TypeError(
+            self,
+    ):
         user_data = "this is not a dictionary"
 
         with self.assertRaises(TypeError):
             validate_user_data(user_data)
 
-    def test_GIVEN_password_shorter_than_min_length_WHEN_validated_THEN_raise_ValueError(self):
+    def test_GIVEN_password_shorter_than_min_length_WHEN_validated_THEN_raise_ValueError(
+            self,
+    ):
         user_data = {
             "username": "testuser",
             "password": "1234",
@@ -63,7 +71,9 @@ class TestLoginManagement(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_user_data(user_data)
 
-    def test_GIVEN_email_without_at_symbol_WHEN_validated_THEN_raise_ValueError(self):
+    def test_GIVEN_email_without_at_symbol_WHEN_validated_THEN_raise_ValueError(
+            self,
+    ):
         user_data ={
             "username": "testuser",
             "password": "1234566788",
@@ -74,7 +84,9 @@ class TestLoginManagement(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_user_data(user_data)
 
-    def test_GIVEN_date_not_in_expected_format_WHEN_validated_THEN_raise_ValueError(self):
+    def test_GIVEN_date_not_in_expected_format_WHEN_validated_THEN_raise_ValueError(
+            self,
+    ):
         user_data = {
             "username": "testuser",
             "password": "<PASSWORD>",
@@ -85,12 +97,40 @@ class TestLoginManagement(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_user_data(user_data)
 
-    def test_GIVEN_non_existing_date_WHEN_validated_THEN_raise_ValueError(self):
+    def test_GIVEN_non_existing_date_WHEN_validated_THEN_raise_ValueError(
+            self,
+    ):
         user_data = {
             "username": "testuser",
             "password": "1223344556787dd",
             "email": "<EMAI@L>",
             "registration_date": "2023-02-30"
+        }
+
+        with self.assertRaises(ValueError):
+            validate_user_data(user_data)
+
+    def test_GIVEN_empty_username_WHEN_validated_THEN_raise_ValueError(
+            self,
+    ):
+        user_data = {
+            "username": "",
+            "password": "1223344556787dd",
+            "email": "<EMAI@L>",
+            "registration_date": "2023-02-01"
+        }
+
+        with self.assertRaises(ValueError):
+            validate_user_data(user_data)
+
+    def test_GIVEN_username_with_only_spaces_WHEN_validated_THEN_raise_ValueError(
+            self,
+    ):
+        user_data = {
+            "username": " ",
+            "password": "1223344556787dd",
+            "email": "<EMAI@L>",
+            "registration_date": "2023-02-01"
         }
 
         with self.assertRaises(ValueError):
